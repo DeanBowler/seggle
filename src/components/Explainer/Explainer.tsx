@@ -55,7 +55,7 @@ export function Explainer() {
           <x.div marginTop={8} spaceY={3}>
             <x.h2 fontSize="2xl">Examples</x.h2>
             <x.article spaceY={3}>
-              <x.div w="400px">
+              <x.div maxWidth="400px">
                 <GuessRow answer="PRICKS" guess="STICKY" />
               </x.div>
               <x.ul paddingBottom={2}>
@@ -67,11 +67,11 @@ export function Explainer() {
                 <ReasonItem>Y has no segments in the correct place.</ReasonItem>
               </x.ul>
               <p>With the clues given, valid guesses for the 1st character are:</p>
-              <x.div w="105px">
+              <x.div maxWidth="105px">
                 <InputRow guess="PR" gameLength={2} />
               </x.div>
               <p>Whilst valid guesses for the 2nd character are:</p>
-              <x.div w="450px">
+              <x.div maxWidth="450px">
                 <InputRow guess="EFGOPQRSUZ" gameLength={10} />
               </x.div>
             </x.article>
@@ -91,7 +91,7 @@ const ReasonItem = styled.liBox`
 const Overlay = styled.box`
   display: flex;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
