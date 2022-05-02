@@ -67,13 +67,19 @@ export function Game() {
   };
 
   return (
-    <x.div display="flex" flexDirection="column" my={3} h="full" alignItems="center">
+    <x.div
+      display="flex"
+      flexDirection="column"
+      my={3}
+      h="full"
+      alignItems="center"
+      overflowY="hidden"
+    >
       <x.div
         display="flex"
         flexDirection="column"
         flex="1 1 auto"
-        px={2}
-        py={3}
+        px={3}
         overflowY="scroll"
         alignItems="center"
         maxWidth="400px"
