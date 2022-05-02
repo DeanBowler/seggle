@@ -18,11 +18,15 @@ export type Segment =
 
 export interface SegmentDisplayProps {
   segments: Partial<Record<Segment, SegmentValue>>;
+  renderInactivePins?: boolean;
 }
 
 const GLOW_VALUES = [SegmentValue.Correct, SegmentValue.Incorrect, SegmentValue.Partial];
 
-export function SegmentDisplay({ segments }: SegmentDisplayProps) {
+export function SegmentDisplay({
+  segments,
+  renderInactivePins = true,
+}: SegmentDisplayProps) {
   const segmentColor = (segment: Segment) => {
     switch (segments[segment]) {
       case SegmentValue.Correct:
@@ -32,9 +36,9 @@ export function SegmentDisplay({ segments }: SegmentDisplayProps) {
       case SegmentValue.Incorrect:
         return 'hsl(0, 80%, 60%)';
       case SegmentValue.Pending:
-        return 'hsl(0, 0%, 80%)';
+        return 'hsl(0, 0%, 90%)';
       default:
-        return 'hsla(0, 0%, 50%, .2)';
+        return renderInactivePins ? 'hsla(0, 0%, 50%, .25)' : 'transparent';
     }
   };
 

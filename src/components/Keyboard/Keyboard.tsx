@@ -66,6 +66,7 @@ export function Keyboard({ onCharacter, onBackspace, onEnter }: KeyboardProps) {
 }
 
 const GuessButton = styled.buttonBox`
+  user-select: none;
   flex: 1;
   font-size: lg;
   margin: 1;
@@ -73,9 +74,9 @@ const GuessButton = styled.buttonBox`
   padding-bottom: 4;
   border-radius: lg;
 
-  border: 2px solid white;
+  border: 2px solid hsla(0, 0%, 100%, 0.8);
   background-color: transparent;
-  color: white;
+  color: hsla(0, 0%, 100%, 0.9);
 
   &:hover {
     background-color: hsla(0, 0%, 100%, 0.1);

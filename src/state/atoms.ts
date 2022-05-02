@@ -3,13 +3,58 @@ import { atomWithStorage } from 'jotai/utils';
 
 export const answerAtom = atom('LOVES');
 
-export interface GuessState {
-  guesses: string[];
-  started: Date;
-  completed?: Date;
+interface Guess {
+  text: string;
+  submitted: Date;
 }
 
-export const guessStateAtom = atomWithStorage<GuessState>('guessState', {
+export interface GuessState {
+  guesses: Guess[];
+  started: Date;
+}
+
+export const guessStateAtom = atomWithStorage<GuessState>('seggle_guess_state', {
   guesses: [],
   started: new Date(),
 });
+
+export const winStateAtom = atom(get => {
+  const { guesses, started } = get(guessStateAtom);
+  const answer = get(answerAtom);
+
+  const matchingGuess = guesses.filter(g => g.text === answer).slice(-1)[0];
+
+  return {
+    hasWon: Boolean(matchingGuess),
+    wonAt: matchingGuess?.submitted || null,
+    gameDuration: new Date(started),
+  };
+});
+
+const EXPLAINER_UPDATED = new Date(2022, 3, 23);
+
+const helpRequestedAtom = atom(false);
+
+export const lastReadExplainerAtom = atomWithStorage<Date | null>(
+  'seggle_last_read_explainer',
+  null,
+);
+
+export const isExplainerOpenAtom = atom<boolean, boolean>(
+  get => {
+    if (get(helpRequestedAtom)) {
+      return true;
+    }
+    const lastReadExplainer = get(lastReadExplainerAtom);
+    return (
+      !lastReadExplainer ||
+      new Date(lastReadExplainer).getTime() < EXPLAINER_UPDATED.getTime()
+    );
+  },
+  (_, set, update: boolean) => {
+    set(helpRequestedAtom, update);
+    if (!update) {
+      set(lastReadExplainerAtom, new Date());
+    }
+  },
+);

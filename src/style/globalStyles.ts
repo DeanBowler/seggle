@@ -1,11 +1,20 @@
 import { createGlobalStyle } from '@xstyled/styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-  body {
-    background: hsl(150deg 10% 20%);
+
+  @font-face {
+    font-family: 'DSEG14';
+    font-style: normal;
+    font-weight: 300;
+    src: local(''),
+          url('./fonts/DSEG14Classic-Regular.woff2') format('woff2')
   }
 
-  /* body::before {
+  body {
+    background: hsl(150deg 15% 20%);
+  }
+/* 
+  body::before {
     content: "";
     position: fixed;
     top: 0;
@@ -15,12 +24,12 @@ export const GlobalStyles = createGlobalStyle`
 
     opacity: 0.05;
 
-    background-image: url(https://as1.ftcdn.net/v2/jpg/01/22/95/22/1000_F_122952203_z1vpAYhgva4HPIQPQTVP5mZIKKbSexNU.jpg);
+    background-image: url(/images/bg.jpg);
     background-repeat: repeat;
-    background-size: 50%;
+    background-size: 420px;
     pointer-events: none;
-  }
-   */
+  } */
+  
   html, body, #app {
     height: 100%;
   }

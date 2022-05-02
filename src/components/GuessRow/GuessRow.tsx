@@ -1,17 +1,14 @@
-import { answerAtom } from '@/state/atoms';
 import { guessCharacter } from '@/utils/mapPins';
 import { x } from '@xstyled/styled-components';
-import { useAtomValue } from 'jotai';
 import { SegmentDisplay } from '../SegmentDisplay';
 
 interface GuessRowProps {
   guess: string;
   attempt?: number;
+  answer: string;
 }
 
-export function GuessRow({ guess, attempt }: GuessRowProps) {
-  const answer = useAtomValue(answerAtom);
-
+export function GuessRow({ guess, attempt, answer }: GuessRowProps) {
   return (
     <x.div
       my={1}
@@ -22,14 +19,28 @@ export function GuessRow({ guess, attempt }: GuessRowProps) {
       px={3}
       borderRadius="xl"
     >
-      <x.div display="flex" marginBottom={0.5}>
-        {new Array(attempt).fill('').map((_, idx) => (
-          <x.div key={idx} color="hsla(0,0%,100%,85%)" fontSize="xl">
-            •
-          </x.div>
-        ))}
+      <x.div display="flex" h={attempt ? '' : 3}>
+        {attempt && (
+          <>
+            {new Array(attempt).fill('').map((_, idx) => (
+              <x.div
+                key={idx}
+                color="hsla(0,0%,100%,85%)"
+                fontSize="xl"
+                userSelect="none"
+              >
+                •
+              </x.div>
+            ))}
+          </>
+        )}
       </x.div>
-      <x.div display="grid" gridTemplateColumns={`repeat(${guess.length}, 1fr)`} gap={2}>
+      <x.div
+        display="grid"
+        gridTemplateColumns={`repeat(${guess.length}, 1fr)`}
+        marginTop={0.5}
+        gap={2}
+      >
         {guess.split('').map((guessChar, idx) => (
           <SegmentDisplay
             key={guessChar + idx}
