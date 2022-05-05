@@ -5,10 +5,11 @@ import { GlobalStyles } from '@/style/globalStyles';
 import { Explainer } from '@/components/Explainer';
 import { Header } from '@/components/Header';
 import { Game } from '@/components/Game';
+import { DefaultTheme } from 'styled-components';
 
 export function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme as DefaultTheme}>
       <Preflight />
       <GlobalStyles />
 

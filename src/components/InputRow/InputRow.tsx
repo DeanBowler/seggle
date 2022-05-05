@@ -19,7 +19,7 @@ export const InputRow = forwardRef(
         display="grid"
         gridTemplateColumns={`repeat(${gameLength}, 1fr)`}
         gap={2}
-        ref={ref}
+        ref={ref as any}
       >
         {guess
           .padEnd(gameLength, ' ')

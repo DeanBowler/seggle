@@ -64,6 +64,6 @@ export const guessCharacter = (guess: string, answer: string) => {
         : SegmentValue.Incorrect,
       ...acc,
     }),
-    {},
+    {} as Record<Pin, SegmentValue>,
   );
 };

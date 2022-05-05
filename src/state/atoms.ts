@@ -1,7 +1,8 @@
+import { intervalToDuration } from 'date-fns';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
-export const answerAtom = atom('LOVES');
+export const answerAtom = atom('');
 
 interface Guess {
   text: string;
@@ -11,11 +12,13 @@ interface Guess {
 export interface GuessState {
   guesses: Guess[];
   started: Date;
+  day: number | null;
 }
 
 export const guessStateAtom = atomWithStorage<GuessState>('seggle_guess_state', {
   guesses: [],
   started: new Date(),
+  day: null,
 });
 
 export const winStateAtom = atom(get => {
@@ -27,7 +30,13 @@ export const winStateAtom = atom(get => {
   return {
     hasWon: Boolean(matchingGuess),
     wonAt: matchingGuess?.submitted || null,
-    gameDuration: new Date(started),
+    gameDuration:
+      started &&
+      matchingGuess &&
+      intervalToDuration({
+        start: new Date(started),
+        end: new Date(matchingGuess.submitted),
+      }),
   };
 });
 

@@ -1,4 +1,5 @@
 import { SegmentValue } from '@/types/segment';
+import { useTheme } from 'styled-components';
 
 export type Segment =
   | 'a'
@@ -27,14 +28,16 @@ export function SegmentDisplay({
   segments,
   renderInactivePins = true,
 }: SegmentDisplayProps) {
+  const theme = useTheme();
+
   const segmentColor = (segment: Segment) => {
     switch (segments[segment]) {
       case SegmentValue.Correct:
-        return 'hsl(130, 65%, 50%)';
+        return theme.colors.positive;
       case SegmentValue.Partial:
-        return 'hsl(50, 100%, 48%)';
+        return theme.colors.warning;
       case SegmentValue.Incorrect:
-        return 'hsl(0, 80%, 60%)';
+        return theme.colors.negative;
       case SegmentValue.Pending:
         return 'hsl(0, 0%, 90%)';
       default:
@@ -59,7 +62,7 @@ export function SegmentDisplay({
             <feFuncA type="linear" slope={0.5} />
           </feComponentTransfer>
           <feMerge>
-            <feMergeNode />
+            {/* <feMergeNode /> */}
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>

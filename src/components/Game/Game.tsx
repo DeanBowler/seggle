@@ -1,6 +1,7 @@
 import { useRef, useState, useMemo, useEffect, useLayoutEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { x } from '@xstyled/styled-components';
+import { Chance } from 'chance';
 
 import dictionary from '@/dictionary.json';
 import { guessStateAtom, answerAtom, winStateAtom } from '@/state/atoms';
@@ -8,11 +9,11 @@ import { guessStateAtom, answerAtom, winStateAtom } from '@/state/atoms';
 import { GuessRow } from '@/components/GuessRow';
 import { InputRow } from '@/components/InputRow';
 import { Keyboard } from '@/components/Keyboard';
+import { WinDisplay } from '@/components/WinDisplay';
+import { differenceInCalendarDays } from 'date-fns';
 
 const gameLength = 6;
-
-const isDateBeforeToday = (date: Date | string) =>
-  new Date(new Date(date).toDateString()) < new Date(new Date().toDateString());
+export const GAME_RELEASED = new Date(2022, 4, 5);
 
 export function Game() {
   const [guessState, setGuessState] = useAtom(guessStateAtom);
@@ -35,15 +36,21 @@ export function Game() {
   }, [guessState]);
 
   useLayoutEffect(() => {
-    const answer =
-      eligibleWords[Math.floor(Math.random() * eligibleWords.length)].toLocaleUpperCase();
+    const daysSinceRelease = differenceInCalendarDays(
+      new Date(guessState.started ?? new Date()),
+      GAME_RELEASED,
+    );
+
+    if (!guessState.started || guessState.day !== daysSinceRelease) {
+      setGuessState({ guesses: [], started: new Date(), day: daysSinceRelease });
+    }
+
+    const chance = new Chance(guessState.day ?? daysSinceRelease);
+    const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
 
     setAnswer(answer);
 
-    setGuessState({ guesses: [], started: new Date() });
-    if (isDateBeforeToday(guessState.started)) {
-      setGuessState({ guesses: [], started: new Date() });
-    }
+    console.log(answer);
   }, []);
 
   const handleCharacter = (character: string) =>
@@ -88,7 +95,7 @@ export function Game() {
           <GuessRow
             guess={guess.text}
             answer={answer}
-            key={guess.submitted.toString()}
+            key={guess.text.toString()}
             attempt={idx + 1}
           />
         ))}
@@ -108,13 +115,19 @@ export function Game() {
         marginTop={4}
         alignItems="center"
         px={2}
+        maxWidth="560px"
+        w="full"
       >
-        <x.div maxWidth={600} w="full">
-          <Keyboard
-            onCharacter={handleCharacter}
-            onBackspace={handleBackspace}
-            onEnter={handleSubmit}
-          />
+        <x.div w="full">
+          {hasWon ? (
+            <WinDisplay />
+          ) : (
+            <Keyboard
+              onCharacter={handleCharacter}
+              onBackspace={handleBackspace}
+              onEnter={handleSubmit}
+            />
+          )}
         </x.div>
       </x.div>
     </x.div>

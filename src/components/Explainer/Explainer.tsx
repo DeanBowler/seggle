@@ -51,6 +51,20 @@ export function Explainer() {
               After each guess, the color of the segments will change to show which
               segments of the display were a match.
             </p>
+            <x.ul paddingTop={3}>
+              <ReasonItem>
+                <x.strong color="negative">Red</x.strong> segments means the correct
+                answer does not use this segment.
+              </ReasonItem>
+              <ReasonItem>
+                <x.strong color="warning">Orange</x.strong> segments shows that this
+                segment is correct, but the character is not complete.
+              </ReasonItem>
+              <ReasonItem>
+                <x.strong color="positive">Green</x.strong> segments display that this
+                character is entirely correct!
+              </ReasonItem>
+            </x.ul>
           </x.div>
           <x.div marginTop={8} spaceY={3}>
             <x.h2 fontSize="2xl">Examples</x.h2>
@@ -59,9 +73,9 @@ export function Explainer() {
                 <GuessRow answer="PRICKS" guess="STICKY" />
               </x.div>
               <x.ul paddingBottom={2}>
-                <ReasonItem>Guesses R and I are complete &amp; correct.</ReasonItem>
+                <ReasonItem>Guesses I, C and K are complete &amp; correct.</ReasonItem>
                 <ReasonItem>
-                  T, C and K each have a single &quot;segment&quot; of the display in the
+                  S and T each have at least one &quot;segment&quot; of the display in the
                   correct place.
                 </ReasonItem>
                 <ReasonItem>Y has no segments in the correct place.</ReasonItem>

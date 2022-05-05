@@ -34,6 +34,16 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  button {
+    cursor: pointer;
+    font-size: lg;
+    background: transparent;
+    color: white;
+    border: 2px solid hsla(0, 0%, 100%, 0.9);
+    padding: 2 3;
+    border-radius: 4px;
+  }
+
   html * {
     @media only screen and (min-device-width: 736px) {
       ::-webkit-scrollbar {
