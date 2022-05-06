@@ -53,7 +53,7 @@ const guessToEmoji = (guess: string, answer: string) =>
     .join('');
 
 const guessesToEmoji = (guesses: string[], answer: string) =>
-  guesses.map(guess => guessToEmoji(guess, answer)).join('\r\n');
+  guesses.map(guess => guessToEmoji(guess, answer)).join('\n');
 
 const shortFormatDuration = ({ hours, minutes, seconds }: Duration) =>
   [hours && `${hours}h`, minutes && `${minutes}m`, seconds && `${seconds}s`]
@@ -75,17 +75,21 @@ export function WinDisplay() {
 
     return `Seggle ${day} ${guesses.length} ${
       guesses.length === 1 ? 'guess' : 'guesses'
-    } ${shortFormatDuration(gameDuration)}\r\n\r\n${emoji}\r\n\r\nhttps://seggle.app`;
+    } ${shortFormatDuration(gameDuration)}\n\n${emoji}\n\nhttps://seggle.app`;
   };
 
   const handleCopyClick = () => {
     copy(generateShareText());
   };
 
-  console.log(generateShareText());
+  const handleShareClick = () => {
+    navigator.share({
+      text: generateShareText(),
+    });
+  };
 
   return (
-    <x.div color="white" display="flex" flexDirection="column" alignItems="center" my={3}>
+    <x.div color="white" display="flex" flexDirection="column" alignItems="center" my={1}>
       <x.p fontSize="xl" paddingBottom={3}>
         {`Seggle ${day} ${guesses.length} ${
           guesses.length === 1 ? 'guess' : 'guesses'
@@ -98,8 +102,10 @@ export function WinDisplay() {
         )}
       </x.div>
       <x.div display="flex" spaceX={3} marginTop={4}>
-        <x.button>Share</x.button>
-        <x.button onClick={handleCopyClick}>Copy</x.button>
+        <x.button onClick={handleShareClick}>Share</x.button>
+        {Boolean(navigator.share) && (
+          <x.button onClick={handleCopyClick}>Copy results</x.button>
+        )}
       </x.div>
     </x.div>
   );

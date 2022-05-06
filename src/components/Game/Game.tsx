@@ -49,8 +49,6 @@ export function Game() {
     const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
 
     setAnswer(answer);
-
-    console.log(answer);
   }, []);
 
   const handleCharacter = (character: string) =>
