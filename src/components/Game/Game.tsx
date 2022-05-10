@@ -109,7 +109,7 @@ export function Game() {
         flexDirection="column"
         marginTop={4}
         alignItems="center"
-        px={2}
+        px={1}
         maxWidth="560px"
         w="full"
       >

@@ -1,5 +1,7 @@
 import styled, { x } from '@xstyled/styled-components';
 
+import { FiDelete } from 'react-icons/fi';
+
 import { useKeyPress } from '@/hooks/useKeyPress';
 
 interface KeyboardProps {
@@ -58,7 +60,7 @@ export function Keyboard({ onCharacter, onBackspace, onEnter }: KeyboardProps) {
         <GuessButton onClick={() => onCharacter('N')}>N</GuessButton>
         <GuessButton onClick={() => onCharacter('M')}>M</GuessButton>
         <GuessButton flex="1.5" onClick={() => onBackspace()}>
-          Back
+          <FiDelete size="1.5rem" />
         </GuessButton>
       </x.div>
     </x.div>
@@ -66,12 +68,18 @@ export function Keyboard({ onCharacter, onBackspace, onEnter }: KeyboardProps) {
 }
 
 const GuessButton = styled.buttonBox`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   user-select: none;
   flex: 1;
   font-size: lg;
   margin: 1;
   padding-top: 4;
   padding-bottom: 4;
+  padding-left: 0;
+  padding-right: 0;
   border-radius: lg;
 
   border: 2px solid hsla(0, 0%, 100%, 0.8);
