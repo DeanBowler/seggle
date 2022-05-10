@@ -42,6 +42,7 @@ export const GlobalStyles = createGlobalStyle`
     border: 2px solid hsla(0, 0%, 100%, 0.9);
     padding: 2 3;
     border-radius: 4px;
+    user-select: none;
   }
 
   html * {

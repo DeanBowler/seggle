@@ -20,6 +20,7 @@ export type Segment =
 export interface SegmentDisplayProps {
   segments: Partial<Record<Segment, SegmentValue>>;
   renderInactivePins?: boolean;
+  glow?: boolean;
 }
 
 const GLOW_VALUES = [SegmentValue.Correct, SegmentValue.Incorrect, SegmentValue.Partial];
@@ -27,6 +28,7 @@ const GLOW_VALUES = [SegmentValue.Correct, SegmentValue.Incorrect, SegmentValue.
 export function SegmentDisplay({
   segments,
   renderInactivePins = true,
+  glow = false,
 }: SegmentDisplayProps) {
   const theme = useTheme();
 
@@ -46,7 +48,9 @@ export function SegmentDisplay({
   };
 
   const filter = (segment: Segment) =>
-    GLOW_VALUES.includes(segments[segment] ?? SegmentValue.Unset) ? 'url(#glow)' : '';
+    glow && GLOW_VALUES.includes(segments[segment] ?? SegmentValue.Unset)
+      ? 'url(#glow)'
+      : '';
 
   return (
     <svg
@@ -62,7 +66,7 @@ export function SegmentDisplay({
             <feFuncA type="linear" slope={0.5} />
           </feComponentTransfer>
           <feMerge>
-            {/* <feMergeNode /> */}
+            <feMergeNode />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>

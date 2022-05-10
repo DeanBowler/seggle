@@ -95,7 +95,7 @@ export function WinDisplay() {
           guesses.length === 1 ? 'guess' : 'guesses'
         } ${shortFormatDuration(gameDuration)}`}
       </x.p>
-      <x.div whiteSpace="pre" fontSize="2xl">
+      <x.div whiteSpace="pre" lineHeight={8} fontSize="2xl">
         {guessesToEmoji(
           guesses.map(g => g.text),
           answer,

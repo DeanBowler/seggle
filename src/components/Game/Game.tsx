@@ -36,10 +36,7 @@ export function Game() {
   }, [guessState]);
 
   useLayoutEffect(() => {
-    const daysSinceRelease = differenceInCalendarDays(
-      new Date(guessState.started ?? new Date()),
-      GAME_RELEASED,
-    );
+    const daysSinceRelease = differenceInCalendarDays(new Date(), GAME_RELEASED);
 
     if (!guessState.started || guessState.day !== daysSinceRelease) {
       setGuessState({ guesses: [], started: new Date(), day: daysSinceRelease });
@@ -87,7 +84,7 @@ export function Game() {
         px={3}
         overflowY="scroll"
         alignItems="center"
-        maxWidth="400px"
+        maxWidth="359px"
       >
         {guessState.guesses.map((guess, idx) => (
           <GuessRow
