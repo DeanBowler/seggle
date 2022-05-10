@@ -42,7 +42,7 @@ export function Game() {
       setGuessState({ guesses: [], started: new Date(), day: daysSinceRelease });
     }
 
-    const chance = new Chance(guessState.day ?? daysSinceRelease);
+    const chance = new Chance(daysSinceRelease);
     const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
 
     setAnswer(answer);
