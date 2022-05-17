@@ -12,8 +12,20 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     background: hsl(150deg 15% 20%);
+    
+    background-image: linear-gradient(
+  215deg,
+  hsl(148deg 18% 19%) 0%,
+  hsl(147deg 31% 17%) 17%,
+  hsl(146deg 48% 15%) 54%,
+  hsl(147deg 41% 16%) 77%,
+  hsl(149deg 25% 18%) 90%,
+  hsl(150deg 16% 20%) 97%,
+  hsl(151deg 16% 22%) 100%,
+  hsl(152deg 16% 23%) 100%
+);
   }
-/* 
+
   body::before {
     content: "";
     position: fixed;
@@ -22,13 +34,12 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     height: 100%;
 
-    opacity: 0.05;
+    opacity: 0.5;
 
-    background-image: url(/images/bg.jpg);
+    background-image: url(/images/background-lighten.svg);
     background-repeat: repeat;
-    background-size: 420px;
     pointer-events: none;
-  } */
+  }
   
   html, body, #app {
     height: 100%;
