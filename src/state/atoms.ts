@@ -34,7 +34,7 @@ export const winStateAtom = atom(get => {
       started &&
       matchingGuess &&
       intervalToDuration({
-        start: new Date(started),
+        start: new Date(guesses[0].submitted),
         end: new Date(matchingGuess.submitted),
       }),
   };

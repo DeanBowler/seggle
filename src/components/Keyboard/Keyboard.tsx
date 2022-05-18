@@ -49,7 +49,11 @@ export function Keyboard({ onCharacter, onBackspace, onEnter }: KeyboardProps) {
         <x.div flex="0.5" />
       </x.div>
       <x.div row justifyContent="center" flexWrap="nowrap">
-        <GuessButton flex="1.5" onClick={() => onEnter()}>
+        <GuessButton
+          flex="1.5"
+          onClick={() => onEnter()}
+          fontSize={{ xs: 'default', sm: 'lg' }}
+        >
           Enter
         </GuessButton>
         <GuessButton onClick={() => onCharacter('Z')}>Z</GuessButton>
@@ -82,7 +86,7 @@ const GuessButton = styled.buttonBox`
   padding-right: 0;
   border-radius: lg;
 
-  border: 2px solid hsla(0, 0%, 100%, 0.8);
+  border: 2px solid hsla(0, 0%, 100%, 0.75);
   background-color: transparent;
   color: hsla(0, 0%, 100%, 0.9);
 
@@ -91,7 +95,7 @@ const GuessButton = styled.buttonBox`
   }
 
   &:focus-visible {
-    border-color: green;
+    border-color: positive;
     outline: none;
   }
 
