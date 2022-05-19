@@ -2,6 +2,7 @@ import { useRef, useState, useMemo, useEffect, useLayoutEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { x } from '@xstyled/styled-components';
 import { Chance } from 'chance';
+import confetti from 'canvas-confetti';
 
 import dictionary from '@/dictionary.json';
 import { guessStateAtom, answerAtom, winStateAtom } from '@/state/atoms';
@@ -68,6 +69,23 @@ export function Game() {
     }));
   };
 
+  useEffect(() => {
+    if (!hasWon) return;
+
+    confetti({
+      origin: {
+        y: 0.97,
+        x: 0.5,
+      },
+      particleCount: 75,
+      startVelocity: 45,
+      spread: 70,
+      colors: ['#2dd248', '#192b21'],
+      shapes: ['square'],
+      disableForReducedMotion: true,
+    });
+  }, [hasWon]);
+
   return (
     <x.div
       display="flex"
@@ -117,11 +135,13 @@ export function Game() {
           {hasWon ? (
             <WinDisplay />
           ) : (
-            <Keyboard
-              onCharacter={handleCharacter}
-              onBackspace={handleBackspace}
-              onEnter={handleSubmit}
-            />
+            answer && (
+              <Keyboard
+                onCharacter={handleCharacter}
+                onBackspace={handleBackspace}
+                onEnter={handleSubmit}
+              />
+            )
           )}
         </x.div>
       </x.div>

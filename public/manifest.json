@@ -1,7 +1,7 @@
 {
   "name": "Seggle",
   "short_name": "Seggle",
-  "theme_color": "#ffffff",
+  "theme_color": "#172b1f",
   "display": "standalone",
   "icons": [
     { "src": "android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },

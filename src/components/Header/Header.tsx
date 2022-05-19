@@ -13,7 +13,7 @@ export function Header() {
     <x.div background="hsla(0,0%,0%,25%)">
       <x.div
         color="hsla(0,0%,100%,85%)"
-        maxWidth="400px"
+        maxWidth="560px"
         m="0 auto"
         px={2}
         my={{
