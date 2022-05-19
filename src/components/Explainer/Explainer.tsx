@@ -1,8 +1,10 @@
 import { x, styled } from '@xstyled/styled-components';
 import { useAtom } from 'jotai';
 
-import { CloseIcon } from '@/icons/CloseIcon';
 import { isExplainerOpenAtom } from '@/state/atoms';
+
+import { CloseIcon } from '@/icons/CloseIcon';
+import { Button } from '@/components/Button';
 import { GuessRow } from '@/components/GuessRow';
 import { InputRow } from '@/components/InputRow';
 
@@ -28,15 +30,9 @@ export function Explainer() {
       >
         <x.header display="flex" justifyContent="space-between">
           <x.h1 fontSize="3xl">How to Play</x.h1>
-          <x.button
-            borderRadius="3xl"
-            background="none"
-            p={1}
-            onClick={handleClose}
-            aria-label="Close help"
-          >
+          <Button borderRadius="3xl" p={1} onClick={handleClose} aria-label="Close help">
             <CloseIcon />
-          </x.button>
+          </Button>
         </x.header>
         <x.main marginTop={5}>
           <x.div spaceY={3}>

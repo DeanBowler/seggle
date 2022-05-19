@@ -1,10 +1,10 @@
-import { isExplainerOpenAtom } from '@/state/atoms';
 import { x } from '@xstyled/styled-components';
 import { useSetAtom } from 'jotai';
-
 import { FaQuestion } from 'react-icons/fa';
-import { SegmentDisplay } from '../SegmentDisplay';
-import { SegmentString } from '../SegmentString';
+
+import { isExplainerOpenAtom } from '@/state/atoms';
+import { Button } from '@/components/Button';
+import { SegmentString } from '@/components/SegmentString';
 
 export function Header() {
   const openExplainer = useSetAtom(isExplainerOpenAtom);
@@ -28,16 +28,14 @@ export function Header() {
         <x.div fontFamily="DSEG14" fontSize="3xl">
           <SegmentString text="SEGGLE" width="167px" />
         </x.div>
-        <x.button
+        <Button
           onClick={() => openExplainer(true)}
           borderRadius="3xl"
-          border="2px solid white"
-          background="none"
-          color="white"
           p={2}
+          aria-label="Open help"
         >
           <FaQuestion />
-        </x.button>
+        </Button>
       </x.div>
     </x.div>
   );

@@ -3,6 +3,7 @@ import styled, { x } from '@xstyled/styled-components';
 import { FiDelete } from 'react-icons/fi';
 
 import { useKeyPress } from '@/hooks/useKeyPress';
+import { Button } from '../Button';
 
 interface KeyboardProps {
   onCharacter(guess: string): void;
@@ -24,86 +25,52 @@ export function Keyboard({ onCharacter, onBackspace, onEnter }: KeyboardProps) {
   return (
     <x.div>
       <x.div row justifyContent="center" flexWrap="nowrap">
-        <GuessButton onClick={() => onCharacter('Q')}>Q</GuessButton>
-        <GuessButton onClick={() => onCharacter('W')}>W</GuessButton>
-        <GuessButton onClick={() => onCharacter('E')}>E</GuessButton>
-        <GuessButton onClick={() => onCharacter('R')}>R</GuessButton>
-        <GuessButton onClick={() => onCharacter('T')}>T</GuessButton>
-        <GuessButton onClick={() => onCharacter('Y')}>Y</GuessButton>
-        <GuessButton onClick={() => onCharacter('U')}>U</GuessButton>
-        <GuessButton onClick={() => onCharacter('I')}>I</GuessButton>
-        <GuessButton onClick={() => onCharacter('O')}>O</GuessButton>
-        <GuessButton onClick={() => onCharacter('P')}>P</GuessButton>
+        <Key onClick={() => onCharacter('Q')}>Q</Key>
+        <Key onClick={() => onCharacter('W')}>W</Key>
+        <Key onClick={() => onCharacter('E')}>E</Key>
+        <Key onClick={() => onCharacter('R')}>R</Key>
+        <Key onClick={() => onCharacter('T')}>T</Key>
+        <Key onClick={() => onCharacter('Y')}>Y</Key>
+        <Key onClick={() => onCharacter('U')}>U</Key>
+        <Key onClick={() => onCharacter('I')}>I</Key>
+        <Key onClick={() => onCharacter('O')}>O</Key>
+        <Key onClick={() => onCharacter('P')}>P</Key>
       </x.div>
       <x.div row justifyContent="center" flexWrap="nowrap">
         <x.div flex="0.5" />
-        <GuessButton onClick={() => onCharacter('A')}>A</GuessButton>
-        <GuessButton onClick={() => onCharacter('S')}>S</GuessButton>
-        <GuessButton onClick={() => onCharacter('D')}>D</GuessButton>
-        <GuessButton onClick={() => onCharacter('F')}>F</GuessButton>
-        <GuessButton onClick={() => onCharacter('G')}>G</GuessButton>
-        <GuessButton onClick={() => onCharacter('H')}>H</GuessButton>
-        <GuessButton onClick={() => onCharacter('J')}>J</GuessButton>
-        <GuessButton onClick={() => onCharacter('K')}>K</GuessButton>
-        <GuessButton onClick={() => onCharacter('L')}>L</GuessButton>
+        <Key onClick={() => onCharacter('A')}>A</Key>
+        <Key onClick={() => onCharacter('S')}>S</Key>
+        <Key onClick={() => onCharacter('D')}>D</Key>
+        <Key onClick={() => onCharacter('F')}>F</Key>
+        <Key onClick={() => onCharacter('G')}>G</Key>
+        <Key onClick={() => onCharacter('H')}>H</Key>
+        <Key onClick={() => onCharacter('J')}>J</Key>
+        <Key onClick={() => onCharacter('K')}>K</Key>
+        <Key onClick={() => onCharacter('L')}>L</Key>
         <x.div flex="0.5" />
       </x.div>
       <x.div row justifyContent="center" flexWrap="nowrap">
-        <GuessButton
-          flex="1.5"
-          onClick={() => onEnter()}
-          fontSize={{ xs: 'default', sm: 'lg' }}
-        >
+        <Key flex="1.5" onClick={() => onEnter()} fontSize={{ xs: 'default', sm: 'lg' }}>
           Enter
-        </GuessButton>
-        <GuessButton onClick={() => onCharacter('Z')}>Z</GuessButton>
-        <GuessButton onClick={() => onCharacter('X')}>X</GuessButton>
-        <GuessButton onClick={() => onCharacter('C')}>C</GuessButton>
-        <GuessButton onClick={() => onCharacter('V')}>V</GuessButton>
-        <GuessButton onClick={() => onCharacter('B')}>B</GuessButton>
-        <GuessButton onClick={() => onCharacter('N')}>N</GuessButton>
-        <GuessButton onClick={() => onCharacter('M')}>M</GuessButton>
-        <GuessButton flex="1.5" onClick={() => onBackspace()}>
+        </Key>
+        <Key onClick={() => onCharacter('Z')}>Z</Key>
+        <Key onClick={() => onCharacter('X')}>X</Key>
+        <Key onClick={() => onCharacter('C')}>C</Key>
+        <Key onClick={() => onCharacter('V')}>V</Key>
+        <Key onClick={() => onCharacter('B')}>B</Key>
+        <Key onClick={() => onCharacter('N')}>N</Key>
+        <Key onClick={() => onCharacter('M')}>M</Key>
+        <Key flex="1.5" onClick={() => onBackspace()}>
           <FiDelete size="1.5rem" />
-        </GuessButton>
+        </Key>
       </x.div>
     </x.div>
   );
 }
 
-const GuessButton = styled.buttonBox`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  user-select: none;
+const Key = styled(Button)`
   flex: 1;
-  font-size: lg;
+  padding-left: 1;
+  padding-right: 1;
   margin: 1;
-  padding-top: 4;
-  padding-bottom: 4;
-  padding-left: 0;
-  padding-right: 0;
-  border-radius: lg;
-
-  border: 2px solid hsla(0, 0%, 100%, 0.75);
-  background-color: transparent;
-  color: hsla(0, 0%, 100%, 0.9);
-
-  &:hover {
-    background-color: hsla(0, 0%, 100%, 0.1);
-  }
-
-  &:focus-visible {
-    border-color: positive;
-    outline: none;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    transform: translateY(2px);
-  }
 `;

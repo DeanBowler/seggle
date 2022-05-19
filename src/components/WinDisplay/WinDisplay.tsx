@@ -5,6 +5,7 @@ import { answerAtom, guessStateAtom, winStateAtom } from '@/state/atoms';
 import { SegmentValue } from '@/types/segment';
 import { guessCharacter } from '@/utils/mapPins';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { Button } from '@/components/Button';
 
 const getCharacterValue = (guess: string, answer: string): SegmentValue => {
   const guessPins = guessCharacter(guess, answer);
@@ -102,9 +103,9 @@ export function WinDisplay() {
         )}
       </x.div>
       <x.div display="flex" spaceX={3} marginTop={4}>
-        <x.button onClick={handleShareClick}>Share</x.button>
+        <Button onClick={handleShareClick}>Share</Button>
         {Boolean(navigator.share) && (
-          <x.button onClick={handleCopyClick}>Copy results</x.button>
+          <Button onClick={handleCopyClick}>Copy results</Button>
         )}
       </x.div>
     </x.div>
