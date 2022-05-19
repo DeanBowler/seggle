@@ -1,8 +1,9 @@
 import { intervalToDuration } from 'date-fns';
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+import { Chance } from 'chance';
 
-export const answerAtom = atom('');
+import { eligibleWords } from '@/constants';
 
 interface Guess {
   text: string;
@@ -19,6 +20,15 @@ export const guessStateAtom = atomWithStorage<GuessState>('seggle_guess_state', 
   guesses: [],
   started: new Date(),
   day: null,
+});
+
+export const answerAtom = atom(get => {
+  const { day } = get(guessStateAtom);
+
+  const chance = new Chance(day ?? 0);
+  const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
+
+  return answer;
 });
 
 export const winStateAtom = atom(get => {

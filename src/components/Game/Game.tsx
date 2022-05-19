@@ -1,20 +1,16 @@
 import { useRef, useState, useMemo, useEffect, useLayoutEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { x } from '@xstyled/styled-components';
-import { Chance } from 'chance';
 import confetti from 'canvas-confetti';
+import { differenceInCalendarDays } from 'date-fns';
 
-import dictionary from '@/dictionary.json';
+import { gameLength, GAME_RELEASED, eligibleWords } from '@/constants';
 import { guessStateAtom, answerAtom, winStateAtom } from '@/state/atoms';
 
 import { GuessRow } from '@/components/GuessRow';
 import { InputRow } from '@/components/InputRow';
 import { Keyboard } from '@/components/Keyboard';
 import { WinDisplay } from '@/components/WinDisplay';
-import { differenceInCalendarDays } from 'date-fns';
-
-const gameLength = 6;
-export const GAME_RELEASED = new Date(2022, 4, 5);
 
 export function Game() {
   const [guessState, setGuessState] = useAtom(guessStateAtom);
@@ -22,14 +18,9 @@ export function Game() {
 
   const guessRowEl = useRef<HTMLElement>();
 
-  const [answer, setAnswer] = useAtom(answerAtom);
+  const answer = useAtomValue(answerAtom);
 
   const [guess, setGuess] = useState('');
-
-  const eligibleWords = useMemo(
-    () => dictionary.filter(word => word.length === gameLength),
-    [gameLength],
-  );
 
   useEffect(() => {
     setGuess('');
@@ -42,11 +33,6 @@ export function Game() {
     if (!guessState.started || guessState.day !== daysSinceRelease) {
       setGuessState({ guesses: [], started: new Date(), day: daysSinceRelease });
     }
-
-    const chance = new Chance(daysSinceRelease);
-    const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
-
-    setAnswer(answer);
   }, []);
 
   const handleCharacter = (character: string) =>
