@@ -27,9 +27,12 @@ export function Game() {
     guessRowEl.current?.scrollIntoView({});
   }, [guessState]);
 
-  useLayoutEffect(() => {
-    const daysSinceRelease = differenceInCalendarDays(new Date(), GAME_RELEASED);
+  const daysSinceRelease = useMemo(
+    () => differenceInCalendarDays(new Date(), GAME_RELEASED),
+    [],
+  );
 
+  useLayoutEffect(() => {
     if (!guessState.started || guessState.day !== daysSinceRelease) {
       setGuessState({ guesses: [], started: new Date(), day: daysSinceRelease });
     }
@@ -56,7 +59,7 @@ export function Game() {
   };
 
   useEffect(() => {
-    if (!hasWon) return;
+    if (!hasWon || guessState.day !== daysSinceRelease) return;
 
     confetti({
       origin: {
