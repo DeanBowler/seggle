@@ -4,6 +4,7 @@ export const Button = styled.buttonBox`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   user-select: none;
   font-size: lg;

@@ -6,6 +6,7 @@ import { Explainer } from '@/components/Explainer';
 import { Header } from '@/components/Header';
 import { Game } from '@/components/Game';
 import { DefaultTheme } from 'styled-components';
+import { SvgFilterDefinitions } from './components/SvgFilters';
 
 export function App() {
   return (
@@ -18,6 +19,7 @@ export function App() {
         <Header />
         <Game />
       </x.div>
+      <SvgFilterDefinitions />
     </ThemeProvider>
   );
 }

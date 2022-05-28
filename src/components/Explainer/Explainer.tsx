@@ -7,6 +7,7 @@ import { CloseIcon } from '@/icons/CloseIcon';
 import { Button } from '@/components/Button';
 import { GuessRow } from '@/components/GuessRow';
 import { InputRow } from '@/components/InputRow';
+import { SocialLinks } from '../SocialLinks';
 
 export function Explainer() {
   const [showExplainer, setShowExplainer] = useAtom(isExplainerOpenAtom);
@@ -87,6 +88,12 @@ export function Explainer() {
             </x.article>
           </x.div>
         </x.main>
+        <x.aside mt={8} pb={4} display="flex" flexDirection="column" alignItems="center">
+          <x.p textAlign="center" letterSpacing="widest">
+            Created by Dean Bowler
+          </x.p>
+          <SocialLinks />
+        </x.aside>
       </x.div>
     </Overlay>
   );

@@ -50,7 +50,7 @@ export const winStateAtom = atom(get => {
   };
 });
 
-const EXPLAINER_UPDATED = new Date(2022, 3, 23);
+const EXPLAINER_UPDATED = new Date(2022, 4, 28);
 
 const helpRequestedAtom = atom(false);
 
