@@ -16,39 +16,53 @@ export interface GuessState {
   day: number | null;
 }
 
-export const guessStateAtom = atomWithStorage<GuessState>('seggle_guess_state', {
-  guesses: [],
-  started: new Date(),
-  day: null,
-});
+const createAtoms = (storageSuffix?: string) => {
+  const guessStateAtom = atomWithStorage<GuessState>(
+    `seggle_guess_state${storageSuffix ? `_${storageSuffix}` : ''}`,
+    {
+      guesses: [],
+      started: new Date(),
+      day: null,
+    },
+  );
 
-export const answerAtom = atom(get => {
-  const { day } = get(guessStateAtom);
+  const answerAtom = atom(get => {
+    const { day } = get(guessStateAtom);
 
-  const chance = new Chance(day ?? 0);
-  const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
+    const chance = new Chance(day ?? 0);
+    const answer = chance.pickone(eligibleWords).toLocaleUpperCase();
 
-  return answer;
-});
+    return answer;
+  });
 
-export const winStateAtom = atom(get => {
-  const { guesses, started } = get(guessStateAtom);
-  const answer = get(answerAtom);
+  const winStateAtom = atom(get => {
+    const { guesses, started } = get(guessStateAtom);
+    const answer = get(answerAtom);
 
-  const matchingGuess = guesses.filter(g => g.text === answer).slice(-1)[0];
+    const matchingGuess = guesses.filter(g => g.text === answer).slice(-1)[0];
+
+    return {
+      hasWon: Boolean(matchingGuess),
+      wonAt: matchingGuess?.submitted || null,
+      gameDuration:
+        started &&
+        matchingGuess &&
+        intervalToDuration({
+          start: new Date(guesses[0].submitted),
+          end: new Date(matchingGuess.submitted),
+        }),
+    };
+  });
 
   return {
-    hasWon: Boolean(matchingGuess),
-    wonAt: matchingGuess?.submitted || null,
-    gameDuration:
-      started &&
-      matchingGuess &&
-      intervalToDuration({
-        start: new Date(guesses[0].submitted),
-        end: new Date(matchingGuess.submitted),
-      }),
+    guessStateAtom,
+    answerAtom,
+    winStateAtom,
   };
-});
+};
+
+const { answerAtom, guessStateAtom, winStateAtom } = createAtoms();
+export { guessStateAtom, answerAtom, winStateAtom };
 
 const EXPLAINER_UPDATED = new Date(2022, 4, 28);
 
