@@ -103,10 +103,10 @@ export function WinDisplay() {
         )}
       </x.div>
       <x.div display="flex" spaceX={3} marginTop={4}>
-        <Button onClick={handleShareClick}>Share</Button>
         {Boolean(navigator.share) && (
-          <Button onClick={handleCopyClick}>Copy results</Button>
+          <Button onClick={handleShareClick}>Share</Button>
         )}
+        <Button onClick={handleCopyClick}>Copy results</Button>
       </x.div>
     </x.div>
   );
